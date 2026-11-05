@@ -1,3 +1,4 @@
+import os  # ARLGOS
 import ray
 import time
 import torch
@@ -15,8 +16,14 @@ class Runner(object):
     """ Actor object to start running simulation on workers.
         Gradient computation is also executed on this object."""
 
-    def __init__(self, meta_agent_id):
+    def __init__(self, meta_agent_id, start_episode=0):
         self.id = meta_agent_id
+        # ARLGOS: seed each worker (upstream leaves them unseeded, so runs were not repeatable).
+        # A resumed run (start_episode > 0) starts new streams instead of replaying the
+        # training seeds its workers drew at the start of the run; a fresh run is unchanged.
+        worker_seed = TRAIN_PARAMS.TRAIN_SEED * 100 + meta_agent_id
+        np.random.seed([worker_seed, start_episode] if start_episode else worker_seed)
+        torch.manual_seed(worker_seed * 100000 + start_episode if start_episode else worker_seed)
         self.device = torch.device('cpu')
         self.curr_episode = int(meta_agent_id)
 
@@ -208,7 +215,9 @@ class Runner(object):
         self.curr_episode = episode_number
         # Set the local weights to the global weights from the master network
         if TRAIN_PARAMS.LOAD_MODEL:
-            weights = torch.load(TRAIN_PARAMS.EXPERIMENT_PATH + 'model/state_dict.pth', map_location=self.device)
+            # ARLGOS: upstream joined these without a '/' (UNICORN_SETUP.md, section 4.5)
+            weights = torch.load(os.path.join(TRAIN_PARAMS.EXPERIMENT_PATH, 'model', 'state_dict.pth'),
+                                 map_location=self.device)
         else:
             weights = torch.load(EXPERIMENT_PARAMS.MODEL_PATH + '/state_dict.pth', map_location=self.device)
         self.set_weights(weights=weights)

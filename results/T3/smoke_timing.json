@@ -1,0 +1,56 @@
+{
+  "run": "smoke_cologne8",
+  "net": "cologne_network_8",
+  "workers": 6,
+  "updates_timed": 3,
+  "first_update_s": 179.0,
+  "update_gaps_s": [
+    125.7,
+    105.3
+  ],
+  "seconds_per_update": 115.5,
+  "episode_seconds": {
+    "n": 18,
+    "mean": 78.0,
+    "max": 95.2
+  },
+  "learner_seconds_per_update": 39.5,
+  "ram_mb": {
+    "before": 7017,
+    "peak": 7438,
+    "total": 7926
+  },
+  "full_run": {
+    "max_episodes": 1500,
+    "updates": 1499,
+    "simulations": 8994,
+    "hours": 48.1,
+    "days": 2.0
+  },
+  "config": {
+    "NET_NAME": "cologne_network_8",
+    "GREEN_DURATION": "15",
+    "YELLOW_DURATION": "5",
+    "TELEPORT_TIME": "-1",
+    "MAX_EPISODE": "4",
+    "NUM_META_AGENTS": "6",
+    "TRAIN_SEED": "1",
+    "USE_GPU": "False"
+  },
+  "machine": {
+    "host": "DESKTOP-VCHBJMN",
+    "os": "Windows-10-10.0.26200-SP0",
+    "cpu": "11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz",
+    "logical_cpus": 8,
+    "ram_mb": 7926,
+    "python": "3.8.20",
+    "torch": "1.13.0+cpu",
+    "numpy": "1.24.2",
+    "ray": "2.3.1",
+    "sumo": "1.28.0",
+    "sumo_binary": "C:\\Users\\DELL\\miniconda3\\envs\\unicorn\\lib\\site-packages\\sumo\\bin\\sumo.exe",
+    "sumo_home": "C:\\Users\\DELL\\miniconda3\\envs\\unicorn\\lib\\site-packages\\sumo",
+    "traci_api": 22,
+    "fork_commit": "1d2b0b8+uncommitted"
+  }
+}

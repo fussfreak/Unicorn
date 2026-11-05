@@ -150,3 +150,37 @@ def calculate_discount_return(x, gamma):
 def set_env(server_number, test=False):
     from env.matsc import MATSC_Env
     return MATSC_Env(server_number, test)
+
+
+# ARLGOS: the latest training state, written after every update so that a stopped run can
+# resume (arlgos/run_unicorn.ps1 -Resume). Upstream's LOAD_MODEL loads model/checkpoint.pkl
+# but nothing ever wrote it (UNICORN_SETUP.md, section 4.5). The RNG states go with it, so a
+# resumed driver continues its random streams instead of restarting them.
+def save_latest(network, curr_episode, model_dir):
+    import random
+    import numpy as np
+    path = os.path.join(model_dir, 'checkpoint.pkl')
+    state = {'model_state_dict': network.state_dict(),
+             'optimizer_state_dict': [network.actor_optimizer.state_dict(),
+                                      network.critic_optimizer.state_dict()],
+             'epoch': curr_episode,
+             'rng': {'random': random.getstate(), 'numpy': np.random.get_state(),
+                     'torch': torch.get_rng_state()}}
+    torch.save(state, path + '.tmp')
+    os.replace(path + '.tmp', path)      # a crash mid-write leaves the previous file intact
+
+
+def load_latest(network, model_dir):
+    """Restore what save_latest wrote; returns the episode counter to continue from."""
+    import random
+    import numpy as np
+    checkpoint = torch.load(os.path.join(model_dir, 'checkpoint.pkl'), map_location='cpu')
+    network.load_state_dict(checkpoint['model_state_dict'])
+    network.actor_optimizer.load_state_dict(checkpoint['optimizer_state_dict'][0])
+    network.critic_optimizer.load_state_dict(checkpoint['optimizer_state_dict'][1])
+    rng = checkpoint.get('rng')
+    if rng:
+        random.setstate(rng['random'])
+        np.random.set_state(rng['numpy'])
+        torch.set_rng_state(rng['torch'])
+    return checkpoint['epoch']

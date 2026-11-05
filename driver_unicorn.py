@@ -294,11 +294,8 @@ def main():
         assert TRAIN_PARAMS.EXPERIMENT_PATH is not None
         print('====== Loading model ======')
         global_summary = SummaryWriter(TRAIN_PARAMS.EXPERIMENT_PATH + '/train')
-        checkpoint = torch.load(TRAIN_PARAMS.EXPERIMENT_PATH + '/model/checkpoint.pkl')
-        global_network.load_state_dict(checkpoint['model_state_dict'])
-        global_network.actor_optimizer.load_state_dict(checkpoint['optimizer_state_dict'][0])
-        global_network.critic_optimizer.load_state_dict(checkpoint['optimizer_state_dict'][1])
-        curr_episode = checkpoint['epoch']
+        # ARLGOS: the file save_latest writes after every update, RNG states included
+        curr_episode = load_latest(global_network, TRAIN_PARAMS.EXPERIMENT_PATH + '/model')
         torch.save(global_network.state_dict(),
                    TRAIN_PARAMS.EXPERIMENT_PATH + '/model/state_dict_{}.pth'.format(curr_episode))
         print("====== Current episode set to {} ======\n".format(curr_episode))
@@ -315,7 +312,9 @@ def main():
         curr_episode = 0
 
     # launch all the threads:
-    meta_agents = [Runner.remote(i) for i in range(TRAIN_PARAMS.NUM_META_AGENTS)]
+    # ARLGOS: the workers learn where the run starts, so a resumed run seeds them afresh
+    start_episode = curr_episode
+    meta_agents = [Runner.remote(i, start_episode) for i in range(TRAIN_PARAMS.NUM_META_AGENTS)]
 
     # get the initial weights from the global network
     weights = global_network.state_dict()
@@ -328,7 +327,10 @@ def main():
     job_list = []  # Ray ObjectIDs
     for i, meta_agent in enumerate(meta_agents):
         job_list.append(meta_agent.job.remote(curr_episode))
-    curr_episode += 1
+    # ARLGOS: a saved counter already names the jobs in flight (the loop below increments
+    # before it launches); incrementing again would make a resumed run one update short
+    if not TRAIN_PARAMS.LOAD_MODEL:
+        curr_episode += 1
 
     tensorboard_data = []
     try:
@@ -375,6 +377,11 @@ def main():
             for i, meta_agent in enumerate(meta_agents):
                 job_list.append(meta_agent.job.remote(curr_episode))
 
+            # ARLGOS: the latest state after every update, for -Resume (utils.save_latest)
+            save_latest(global_network, curr_episode,
+                        TRAIN_PARAMS.EXPERIMENT_PATH + '/model' if TRAIN_PARAMS.LOAD_MODEL
+                        else EXPERIMENT_PARAMS.MODEL_PATH)
+
             # save model
             if curr_episode % TRAIN_PARAMS.SAVE_MODEL_STEP == 0:
                 print('Saving Model !', end='\n')
@@ -401,8 +408,9 @@ def main():
 
 if __name__ == "__main__":
     # Set random number generator
-    random.seed(0)
-    np.random.seed(0)
-    torch.manual_seed(0)
+    # ARLGOS: TRAIN_SEED (UNICORN_SEED, default 0) instead of a fixed 0
+    random.seed(TRAIN_PARAMS.TRAIN_SEED)
+    np.random.seed(TRAIN_PARAMS.TRAIN_SEED)
+    torch.manual_seed(TRAIN_PARAMS.TRAIN_SEED)
 
     main()

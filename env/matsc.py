@@ -13,6 +13,17 @@ from collections import OrderedDict
 from maps.net_simu_generator import gen_cfg_file
 
 
+def draw_train_seed():
+    """
+    ARLGOS: simulation seed for one training episode, never a reserved test or validation seed
+    @return: int in [0, 100000)
+    """
+    seed = np.random.randint(0, 100000)
+    while seed in SUMO_PARAMS.TEST_SEEDS or seed in SUMO_PARAMS.VAL_SEEDS:
+        seed = np.random.randint(0, 100000)
+    return seed
+
+
 class MATSC_Env(gym.Env, ABC):
     def __init__(self, server_number, test=False):
         super(MATSC_Env, self).__init__()
@@ -217,7 +228,7 @@ class MATSC_Env(gym.Env, ABC):
         print('Worker {} || Reset Environment'.format(self.server_number))
         # Set random seed for simulation
         if self.random_seed:
-            self.seed = np.random.randint(0, 100000)
+            self.seed = draw_train_seed()  # ARLGOS: upstream np.random.randint(0, 100000)
         else:
             self.seed += 1
 

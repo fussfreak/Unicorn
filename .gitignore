@@ -1,2 +1,22 @@
 /.idea
 *.pyc
+
+# ARLGOS: run outputs (summaries in results/ are committed, raw data is not)
+/Train_MATSC/
+/Test/
+/logs/
+/results/*/raw/
+# ARLGOS: files SUMO and the workers write next to each map (<map>_<worker>.sumocfg,
+# trip_<worker>.xml, ...). The map's own <map>.sumocfg is tracked, so this doesn't hide it.
+/maps/*/*_[0-9]*.sumocfg
+/maps/*/trip_*.xml
+/maps/*/statistic_*.xml
+/maps/*/routes_output_*.xml
+/maps/grid_network_5_5/grid_network_5_5_*.rou.xml
+/maps/*/e1output.xml
+/maps/*/e2output.xml
+/maps/*/ild.out
+# Fenglin's generated sumocfg also writes these next to the map (fcd.xml: ~150 MB per episode)
+/maps/*/fcd.xml
+/maps/*/E1_out.xml
+/maps/*/E3_out.xml

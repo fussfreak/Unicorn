@@ -1,0 +1,40 @@
+# ARLGOS (T9, Decision 7): environment unicorn_cpu.yml with Python 3.10 instead of 3.8, plus
+# libsumo 1.28.0, which has no Python 3.8 build.  Every package version is the same as in
+# unicorn_cpu.yml.  Setting UNICORN_LIBSUMO=1 makes env/sumo_api.py hand Unicorn's code
+# libsumo (SUMO in-process) instead of traci (a socket per call): a speed-only change, checked
+# by arlgos/corridor_parity.py (identical traces).  Used for the corridor runs (T10).
+#   conda env create -f environments/unicorn_libsumo.yml
+name: unicorn_libsumo
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cpu
+      - torch==1.13.0+cpu
+      - numpy==1.24.2
+      - scipy==1.10.1
+      - pandas==1.5.3
+      - matplotlib==3.7.3
+      - seaborn==0.12.2
+      - Pillow==9.4.0
+      - PyYAML==6.0
+      - tqdm==4.66.1
+      - scikit-learn==1.3.0
+      - joblib==1.3.2
+      - gym==0.26.2
+      - ray==2.3.1
+      - cloudpickle==2.2.1
+      - einops==0.6.0
+      - kmeans-pytorch==0.3
+      - tensorboard==2.13.0
+      - wandb==0.14.2
+      - requests==2.28.2
+      - click==8.1.3
+      - packaging==23.0
+      - filelock==3.11.0
+      - eclipse-sumo==1.28.0
+      - traci==1.28.0
+      - sumolib==1.28.0
+      - libsumo==1.28.0

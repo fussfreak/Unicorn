@@ -13,6 +13,8 @@
 /maps/*/statistic_*.xml
 /maps/*/routes_output_*.xml
 /maps/grid_network_5_5/grid_network_5_5_*.rou.xml
+# ARLGOS (T15A): Monaco writes one route file per worker too (the map's own monaco_network_30.rou.xml stays tracked)
+/maps/monaco_network_30/monaco_network_30_*.rou.xml
 /maps/*/e1output.xml
 /maps/*/e2output.xml
 /maps/*/ild.out
@@ -20,3 +22,7 @@
 /maps/*/fcd.xml
 /maps/*/E1_out.xml
 /maps/*/E3_out.xml
+# ARLGOS (T9): the parity check's SUMO output files (~270 MB); its reports are committed
+/results/T9/parity_outputs/
+# ARLGOS (T15F): held-out traffic days, written per worker by maps/shaoxing_network_7/build_file.py
+/maps/*/heldout_*.rou.xml

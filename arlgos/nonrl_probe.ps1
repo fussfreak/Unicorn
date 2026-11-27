@@ -23,14 +23,17 @@ param(
     [string]$Net = "shaoxing_network_7",
     [string[]]$Agents = @("FIXED", "GREEDY", "PRESSURE"),
     [string]$Python = "C:\Users\DELL\miniconda3\envs\unicorn\python.exe",
-    [int]$ServerBase = 90
+    [int]$ServerBase = 90,
+    # T15A: the lab PC writes its own runs to results\nonrl_probe_labpc, so a lab-PC table never
+    # mixes in the laptop's non-RL runs (one machine per table)
+    [string]$OutRoot = "results\nonrl_probe"
 )
 $ErrorActionPreference = 'Stop'
 Set-Location (Split-Path $PSScriptRoot -Parent)
 $env:PYTHONPATH = ''              # the standalone SUMO installer's tools folder would shadow the env's traci
 $env:PYTHONIOENCODING = 'utf-8'
 $env:SUMO_HOME = (& $Python -c "import sumo; print(sumo.SUMO_HOME)").Trim()   # inherited by the children
-$raw = "results\nonrl_probe\raw"
+$raw = Join-Path $OutRoot "raw"
 $out = Join-Path $raw "sumo-1.28.0\$Net"
 New-Item -ItemType Directory -Force logs, $out | Out-Null
 function Stamp { Get-Date -Format HH:mm }
@@ -58,9 +61,10 @@ try {
             throw "$Net $agent did not finish: see logs\probe_${Net}_${agent}.err.log"
         }
     }
-    & $Python -u arlgos\nonrl_probe.py summarize --root $raw --out "results\nonrl_probe\$Net"
+    # --net: this network's runs only (the raw folder may hold several networks; T15A)
+    & $Python -u arlgos\nonrl_probe.py summarize --root $raw --net $Net --out (Join-Path $OutRoot $Net)
     if ($LASTEXITCODE -ne 0) { throw "summarize exited $LASTEXITCODE" }
-    Write-Host ("[{0}] Done: results\nonrl_probe\{1}.md" -f (Stamp), $Net)
+    Write-Host ("[{0}] Done: {1}.md" -f (Stamp), (Join-Path $OutRoot $Net))
 }
 finally {
     foreach ($p in $procs) { if ($p -and -not $p.HasExited) { $p.Kill() } }

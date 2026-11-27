@@ -16,8 +16,11 @@ DATASET_FAMILY = {'grid_network_5_5': 'ma2c', 'monaco_network_30': 'ma2c',
                   'cologne_network_8': 'resco', 'ingolstadt_network_21': 'resco',
                   'arterial_network_4_4': 'resco', 'grid_network_4_4': 'resco',
                   'shaoxing_network_7': 'gesa', 'shenzhen_network_29': 'gesa',
-                  'shenzhen_network_55': 'gesa'}
-FAMILY_TIMING = {'ma2c': (10, 3, 300), 'resco': (15, 5, -1), 'gesa': (15, 5, 600)}
+                  'shenzhen_network_55': 'gesa', 'corridor_3': 'corridor'}
+# ARLGOS (T9): env/corridor.py reads none of the 'corridor' values. It decides every 10 s, takes
+# yellow (10 s) and all-red (5 s) from env/corridor_signals.py, and time-to-teleport (300 s) from
+# maps/corridor_3/corridor.sumocfg, exactly as ARLGOS does. The tuple only records them.
+FAMILY_TIMING = {'ma2c': (10, 3, 300), 'resco': (15, 5, -1), 'gesa': (15, 5, 600), 'corridor': (10, 10, 300)}
 
 
 class INPUT_PARAMS:
@@ -66,6 +69,17 @@ class SUMO_PARAMS:
     VAL_SEEDS           = list(range(5042, 5062))  # ARLGOS: reserved for checkpoint selection
     MAX_SUMO_STEP       = 3600
     MAX_TEST_STEP       = 3600
+    # ARLGOS (T9): the corridor's reserved seeds are ARLGOS's: test 1042-1061 plus the G2
+    # confirmation seeds 1062-1161 (docs/G2_confirmation_protocol.md); validation as above.
+    # Its episodes are 300 s warm-up + 900 s (env/corridor.py); MAX_* only record that.
+    SENSING             = os.environ.get('UNICORN_SENSING', 'full')  # ARLGOS (T9): 'full' | 'camera'
+    # ARLGOS (T15F): recorded in config.json only; maps/shaoxing_network_7/build_file.py reads the
+    # environment itself (Fenglin's held-out demand and its trajectory file; other maps ignore both)
+    DEMAND              = os.environ.get('UNICORN_DEMAND', 'published') or 'published'
+    FCD                 = os.environ.get('UNICORN_FCD', '0') or '0'
+    if NET_NAME == 'corridor_3':
+        TEST_SEEDS      = list(range(1042, 1162))
+        MAX_SUMO_STEP   = MAX_TEST_STEP = 900
     # MA2C: 5s/2s, RESCO and SG: 10s/3s (5s/2s for arterial4x4), GESA: 10s/5s
     # ARLGOS: the comment above disagrees with the README and the paper; the timing
     # now follows the dataset family (FAMILY_TIMING). Upstream was 15 / 5 / 300.

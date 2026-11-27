@@ -1,6 +1,12 @@
 """ARLGOS: headroom probe -- Unicorn's non-RL controllers on one network (SUMO 1.28 only).
 
     python arlgos/nonrl_probe.py summarize --root results/nonrl_probe/raw --out results/nonrl_probe/<net>
+    python arlgos/nonrl_probe.py summarize --root results/T3/raw --net cologne_network_8 --sumo 1.28.0 \
+        --out results/nonrl_probe/cologne_network_8      # reuse T3's runs (added 2026-11-23, T15)
+
+--net / --sumo (optional, default: every run under --root) keep one network and/or one SUMO
+version, so each results/nonrl_probe/<net>.json holds that network's runs only (paper_compare.py
+reads it for the harness check).
 
 The runs themselves are `arlgos/version_check.py run` unchanged (launcher:
 arlgos/nonrl_probe.ps1), so the controllers, seeds (1000, 1100, ..., 1900),
@@ -28,9 +34,17 @@ PAPER_ROWS = {'shaoxing_network_7': {
     'Unicorn-multiple': [(0.37, 0.09), (3.56, 1.55), (20.74, 6.98), (1.20, 0.63), (232.14, 408.46), (102.72, 312.12)]}}
 
 
+def select(runs, net=None, sumo=None):
+    """Keep the runs of one network and/or one SUMO version; None keeps all (the original behaviour)."""
+    return {k: v for k, v in runs.items() if (net is None or k[1] == net) and (sumo is None or k[0] == sumo)}
+
+
 def summarize(args):
     from scipy import stats
-    runs = load(args.root)
+    runs = select(load(args.root), getattr(args, 'net', None), getattr(args, 'sumo', None))
+    if not runs:
+        raise SystemExit('no finished runs under {} for net={} sumo={}'.format(
+            args.root, getattr(args, 'net', None), getattr(args, 'sumo', None)))
     nets = sorted({k[1] for k in runs})
     md, out = ['# Non-RL headroom probe', ''], {'runs': {}, 'machine': machine_info()}
     md += ['Unicorn\'s own non-RL controllers (`evaluator_non_rl.py` via `arlgos/version_check.py run`,',
@@ -86,6 +100,8 @@ def main():
     p_sum = sub.add_parser('summarize')
     p_sum.add_argument('--root', required=True)
     p_sum.add_argument('--out', required=True, help='output path without extension')
+    p_sum.add_argument('--net', default=None, help='keep only this network (default: all)')
+    p_sum.add_argument('--sumo', default=None, help='keep only this SUMO version, e.g. 1.28.0 (default: all)')
     args = parser.parse_args()
     summarize(args)
 

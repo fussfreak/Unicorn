@@ -1,0 +1,67 @@
+{
+ "demand": "published",
+ "rows": [
+  [
+   "**ARLGOS-v2** (greedy)",
+   3,
+   {
+    "queue": 0.3766683006535948,
+    "speed": 4.12183763460567,
+    "delay": 14.327581144887123,
+    "completion": 1.2077314814814815,
+    "trip_time": 227.85493460980382,
+    "trip_delay": 129.56290039473694
+   }
+  ],
+  [
+   "Fixed-time",
+   1,
+   {
+    "queue": 0.73415522875817,
+    "speed": 3.7547483991861013,
+    "delay": 14.100839054334688,
+    "completion": 1.1884722222222222,
+    "trip_time": 264.52479309516644,
+    "trip_delay": 167.02143411983042
+   }
+  ],
+  [
+   "Greedy",
+   1,
+   {
+    "queue": 0.5069163398692811,
+    "speed": 4.0053347977209075,
+    "delay": 32.66796056967641,
+    "completion": 1.193861111111111,
+    "trip_time": 231.3223274109469,
+    "trip_delay": 133.14613848456753
+   }
+  ],
+  [
+   "Max-pressure",
+   1,
+   {
+    "queue": 0.5068062091503268,
+    "speed": 4.0050768586979055,
+    "delay": 32.66670520949229,
+    "completion": 1.1941666666666666,
+    "trip_time": 231.0644121766315,
+    "trip_delay": 132.91020432019383
+   }
+  ]
+ ],
+ "verdict": null,
+ "copied": [
+  "arlgos_shaoxing_network_7_seed1",
+  "arlgos_shaoxing_network_7_seed2",
+  "arlgos_shaoxing_network_7_seed3"
+ ],
+ "runs": {
+  "ARLGOS-v2": [
+   "arlgos_shaoxing_network_7_seed1",
+   "arlgos_shaoxing_network_7_seed2",
+   "arlgos_shaoxing_network_7_seed3"
+  ],
+  "Unicorn": []
+ }
+}

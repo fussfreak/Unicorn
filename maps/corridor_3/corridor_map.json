@@ -1,0 +1,121 @@
+{
+  "cameras": {
+    "C3_N": [
+      "e2_C3_N_0",
+      "e2_C3_N_1"
+    ],
+    "C3_S": [
+      "e2_C3_S_0",
+      "e2_C3_S_1"
+    ],
+    "C3_E": [
+      "e2_C3_E_0"
+    ],
+    "C3_W": [
+      "e2_C3_W_0"
+    ],
+    "C2_N": [
+      "e2_C2_N_0",
+      "e2_C2_N_1"
+    ],
+    "C2_S": [
+      "e2_C2_S_0",
+      "e2_C2_S_1"
+    ],
+    "C2_E": [
+      "e2_C2_E_0"
+    ],
+    "C2_W": [
+      "e2_C2_W_0"
+    ],
+    "C1_N": [
+      "e2_C1_N_0",
+      "e2_C1_N_1"
+    ],
+    "C1_S": [
+      "e2_C1_S_0",
+      "e2_C1_S_1"
+    ],
+    "C1_E": [
+      "e2_C1_E_0"
+    ],
+    "C1_W": [
+      "e2_C1_W_0"
+    ]
+  },
+  "camera_edges": {
+    "C3_N": "W_C3",
+    "C3_S": "C2_C3",
+    "C3_E": "C3p_C3",
+    "C3_W": "C3m_C3",
+    "C2_N": "C3_C2",
+    "C2_S": "C1_C2",
+    "C2_E": "C2p_C2",
+    "C2_W": "C2m_C2",
+    "C1_N": "C2_C1",
+    "C1_S": "E_C1",
+    "C1_E": "C1p_C1",
+    "C1_W": "C1m_C1"
+  },
+  "tls": {
+    "C3": {
+      "groups": [
+        "EW",
+        "EW",
+        "EW",
+        "NS",
+        "NS",
+        "NS",
+        "NS",
+        "EW",
+        "EW",
+        "EW",
+        "NS",
+        "NS",
+        "NS",
+        "NS"
+      ],
+      "green": "GGgGGGgGGgGGGg"
+    },
+    "C2": {
+      "groups": [
+        "EW",
+        "EW",
+        "EW",
+        "NS",
+        "NS",
+        "NS",
+        "NS",
+        "EW",
+        "EW",
+        "EW",
+        "NS",
+        "NS",
+        "NS",
+        "NS"
+      ],
+      "green": "GGgGGGgGGgGGGg"
+    },
+    "C1": {
+      "groups": [
+        "EW",
+        "EW",
+        "EW",
+        "NS",
+        "NS",
+        "NS",
+        "NS",
+        "EW",
+        "EW",
+        "EW",
+        "NS",
+        "NS",
+        "NS",
+        "NS"
+      ],
+      "green": "GGgGGGgGGgGGGg"
+    }
+  },
+  "det_len_m": 50.0,
+  "x_offset": 400.0
+}

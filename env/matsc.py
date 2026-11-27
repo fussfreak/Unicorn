@@ -1,6 +1,6 @@
 # coding=utf-8
 import gym
-import traci
+from env.sumo_api import traci  # ARLGOS (T9): traci, or libsumo with UNICORN_LIBSUMO=1
 import numpy as np
 import xml.etree.ElementTree as ET
 
@@ -179,6 +179,9 @@ class MATSC_Env(gym.Env, ABC):
             self.tls_map_dataset = 'gesa'
         elif self.net_file_name == 'singapore_network_16':
             self.tls_map_dataset = 'sg'
+        elif self.net_file_name == 'corridor_3':
+            # ARLGOS (T9): env/corridor.py overrides observe() and calculate_reward()
+            self.tls_map_dataset = 'corridor'
         else:
             raise NotImplementedError
 

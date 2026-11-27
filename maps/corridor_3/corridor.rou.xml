@@ -1,0 +1,35 @@
+<routes>
+    <vType id="car" length="4.5" minGap="2.5" accel="2.6" decel="4.5" sigma="0.5" speedFactor="1.2" speedDev="0.1"/>
+    <flow id="f00_W_C3__C1_E" type="car" begin="0" end="1300" from="W_C3" to="C1_E" period="exp(0.105000)" departLane="best" departSpeed="max"/>
+    <flow id="f01_W_C3__C3_C3p" type="car" begin="0" end="1300" from="W_C3" to="C3_C3p" period="exp(0.011667)" departLane="best" departSpeed="max"/>
+    <flow id="f02_W_C3__C3_C3m" type="car" begin="0" end="1300" from="W_C3" to="C3_C3m" period="exp(0.011667)" departLane="best" departSpeed="max"/>
+    <flow id="f03_W_C3__C2_C2p" type="car" begin="0" end="1300" from="W_C3" to="C2_C2p" period="exp(0.011667)" departLane="best" departSpeed="max"/>
+    <flow id="f04_W_C3__C2_C2m" type="car" begin="0" end="1300" from="W_C3" to="C2_C2m" period="exp(0.011667)" departLane="best" departSpeed="max"/>
+    <flow id="f05_W_C3__C1_C1p" type="car" begin="0" end="1300" from="W_C3" to="C1_C1p" period="exp(0.011667)" departLane="best" departSpeed="max"/>
+    <flow id="f06_W_C3__C1_C1m" type="car" begin="0" end="1300" from="W_C3" to="C1_C1m" period="exp(0.011667)" departLane="best" departSpeed="max"/>
+    <flow id="f07_E_C1__C3_W" type="car" begin="0" end="1300" from="E_C1" to="C3_W" period="exp(0.105000)" departLane="best" departSpeed="max"/>
+    <flow id="f08_E_C1__C3_C3p" type="car" begin="0" end="1300" from="E_C1" to="C3_C3p" period="exp(0.011667)" departLane="best" departSpeed="max"/>
+    <flow id="f09_E_C1__C3_C3m" type="car" begin="0" end="1300" from="E_C1" to="C3_C3m" period="exp(0.011667)" departLane="best" departSpeed="max"/>
+    <flow id="f10_E_C1__C2_C2p" type="car" begin="0" end="1300" from="E_C1" to="C2_C2p" period="exp(0.011667)" departLane="best" departSpeed="max"/>
+    <flow id="f11_E_C1__C2_C2m" type="car" begin="0" end="1300" from="E_C1" to="C2_C2m" period="exp(0.011667)" departLane="best" departSpeed="max"/>
+    <flow id="f12_E_C1__C1_C1p" type="car" begin="0" end="1300" from="E_C1" to="C1_C1p" period="exp(0.011667)" departLane="best" departSpeed="max"/>
+    <flow id="f13_E_C1__C1_C1m" type="car" begin="0" end="1300" from="E_C1" to="C1_C1m" period="exp(0.011667)" departLane="best" departSpeed="max"/>
+    <flow id="f14_C3p_C3__C3_C3m" type="car" begin="0" end="1300" from="C3p_C3" to="C3_C3m" period="exp(0.042000)" departLane="best" departSpeed="max"/>
+    <flow id="f15_C3p_C3__C3_W" type="car" begin="0" end="1300" from="C3p_C3" to="C3_W" period="exp(0.014000)" departLane="best" departSpeed="max"/>
+    <flow id="f16_C3p_C3__C1_E" type="car" begin="0" end="1300" from="C3p_C3" to="C1_E" period="exp(0.014000)" departLane="best" departSpeed="max"/>
+    <flow id="f17_C3m_C3__C3_C3p" type="car" begin="0" end="1300" from="C3m_C3" to="C3_C3p" period="exp(0.042000)" departLane="best" departSpeed="max"/>
+    <flow id="f18_C3m_C3__C3_W" type="car" begin="0" end="1300" from="C3m_C3" to="C3_W" period="exp(0.014000)" departLane="best" departSpeed="max"/>
+    <flow id="f19_C3m_C3__C1_E" type="car" begin="0" end="1300" from="C3m_C3" to="C1_E" period="exp(0.014000)" departLane="best" departSpeed="max"/>
+    <flow id="f20_C2p_C2__C2_C2m" type="car" begin="0" end="1300" from="C2p_C2" to="C2_C2m" period="exp(0.042000)" departLane="best" departSpeed="max"/>
+    <flow id="f21_C2p_C2__C3_W" type="car" begin="0" end="1300" from="C2p_C2" to="C3_W" period="exp(0.014000)" departLane="best" departSpeed="max"/>
+    <flow id="f22_C2p_C2__C1_E" type="car" begin="0" end="1300" from="C2p_C2" to="C1_E" period="exp(0.014000)" departLane="best" departSpeed="max"/>
+    <flow id="f23_C2m_C2__C2_C2p" type="car" begin="0" end="1300" from="C2m_C2" to="C2_C2p" period="exp(0.042000)" departLane="best" departSpeed="max"/>
+    <flow id="f24_C2m_C2__C3_W" type="car" begin="0" end="1300" from="C2m_C2" to="C3_W" period="exp(0.014000)" departLane="best" departSpeed="max"/>
+    <flow id="f25_C2m_C2__C1_E" type="car" begin="0" end="1300" from="C2m_C2" to="C1_E" period="exp(0.014000)" departLane="best" departSpeed="max"/>
+    <flow id="f26_C1p_C1__C1_C1m" type="car" begin="0" end="1300" from="C1p_C1" to="C1_C1m" period="exp(0.042000)" departLane="best" departSpeed="max"/>
+    <flow id="f27_C1p_C1__C3_W" type="car" begin="0" end="1300" from="C1p_C1" to="C3_W" period="exp(0.014000)" departLane="best" departSpeed="max"/>
+    <flow id="f28_C1p_C1__C1_E" type="car" begin="0" end="1300" from="C1p_C1" to="C1_E" period="exp(0.014000)" departLane="best" departSpeed="max"/>
+    <flow id="f29_C1m_C1__C1_C1p" type="car" begin="0" end="1300" from="C1m_C1" to="C1_C1p" period="exp(0.042000)" departLane="best" departSpeed="max"/>
+    <flow id="f30_C1m_C1__C3_W" type="car" begin="0" end="1300" from="C1m_C1" to="C3_W" period="exp(0.014000)" departLane="best" departSpeed="max"/>
+    <flow id="f31_C1m_C1__C1_E" type="car" begin="0" end="1300" from="C1m_C1" to="C1_E" period="exp(0.014000)" departLane="best" departSpeed="max"/>
+</routes>

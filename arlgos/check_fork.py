@@ -15,6 +15,10 @@ Checks that
   6. resuming (T4): UNICORN_RESUME switches LOAD_MODEL on for the named run,
      save_latest / load_latest restore weights, optimisers, the episode counter
      and the RNG streams, and the driver and workers use them.
+  7. the ARLGOS corridor (T9): arlgos/check_corridor.py, run with UNICORN_NET=corridor_3.
+  8. ARLGOS-v2 on the benchmark networks (T14): arlgos/check_arlgos.py.
+  9-11. Fenglin switches (T15F), the paper comparison, the per-junction diagnosis (T15).
+  12-13. The lab PC's head-to-head report and the import of the supervisor's Unicorn runs (T15A).
 Exits 1 if any check fails.
 """
 import argparse
@@ -183,6 +187,85 @@ def main():
     check("workers' resume path has its separator (upstream: EXPERIMENT_PATH + 'model/...')",
           "EXPERIMENT_PATH + 'model/" not in runner
           and "os.path.join(TRAIN_PARAMS.EXPERIMENT_PATH, 'model', 'state_dict.pth')" in runner)
+
+    # 7. the ARLGOS corridor (T9): arlgos/check_corridor.py, with UNICORN_NET=corridor_3
+    out = subprocess.run([sys.executable, os.path.join(REPO, 'arlgos', 'check_corridor.py')], cwd=REPO,
+                         env=dict(os.environ, UNICORN_NET='corridor_3'), capture_output=True, text=True)
+    lines = [l for l in out.stdout.splitlines() if l.startswith('[PASS]') or l.startswith('[FAIL]')]
+    for line in lines:
+        print('  corridor ' + line)
+        if line.startswith('[FAIL]'):
+            FAILED.append('corridor: ' + line[7:])
+    check('corridor checks ran (arlgos/check_corridor.py)', out.returncode in (0, 1) and len(lines) >= 12,
+          '' if lines else (out.stderr.strip().splitlines() or ['no output'])[-1])
+
+    # 8. ARLGOS-v2 on the benchmark networks (T14): arlgos/check_arlgos.py
+    out = subprocess.run([sys.executable, os.path.join(REPO, 'arlgos', 'check_arlgos.py')], cwd=REPO,
+                         env={k: v for k, v in os.environ.items() if k != 'UNICORN_NET'},
+                         capture_output=True, text=True)
+    lines = [l for l in out.stdout.splitlines() if l.startswith('[PASS]') or l.startswith('[FAIL]')]
+    for line in lines:
+        print('  arlgos-v2 ' + line)
+        if line.startswith('[FAIL]'):
+            FAILED.append('arlgos-v2: ' + line[7:])
+    check('ARLGOS-v2 checks ran (arlgos/check_arlgos.py)', out.returncode in (0, 1) and len(lines) >= 50,
+          '{} lines'.format(len(lines)) if lines else (out.stderr.strip().splitlines() or ['no output'])[-1])
+
+    # 9. Fenglin's switches (T15F): trajectory file off, held-out demand, the Unicorn evaluator's
+    #    validation score; arlgos/fenglin_check.py on 300 s episodes (the 3600 s version wrote
+    #    results/T15F/fenglin_check.md)
+    out = subprocess.run([sys.executable, os.path.join(REPO, 'arlgos', 'fenglin_check.py'), '--sim_seconds', '300'],
+                         cwd=REPO, env={k: v for k, v in os.environ.items() if k not in ('UNICORN_NET', 'UNICORN_DEMAND',
+                                                                                        'UNICORN_FCD')},
+                         capture_output=True, text=True)
+    lines = [l for l in out.stdout.splitlines() if l.startswith('[PASS]') or l.startswith('[FAIL]')]
+    for line in lines:
+        print('  fenglin ' + line)
+        if line.startswith('[FAIL]'):
+            FAILED.append('fenglin: ' + line[7:])
+    check('Fenglin checks ran (arlgos/fenglin_check.py)', out.returncode in (0, 1) and len(lines) >= 13,
+          '{} lines'.format(len(lines)) if lines else (out.stdout + out.stderr).strip().splitlines()[-1:])
+
+    # 10. The comparison with the paper's published numbers (2026-11-22): arlgos/paper_compare.py's
+    #     self-test on made-up runs (pooling, signs for lower/higher-is-better metrics, verdicts)
+    out = subprocess.run([sys.executable, os.path.join(REPO, 'arlgos', 'paper_compare.py'), '--selftest'],
+                         cwd=REPO, capture_output=True, text=True)
+    lines = [l for l in out.stdout.splitlines() if l.startswith('[PASS]') or l.startswith('[FAIL]')]
+    for line in lines:
+        print('  paper ' + line)
+        if line.startswith('[FAIL]'):
+            FAILED.append('paper: ' + line[7:])
+    check('paper comparison checks ran (arlgos/paper_compare.py --selftest)',
+          out.returncode in (0, 1) and len(lines) >= 7,
+          '{} lines'.format(len(lines)) if lines else (out.stdout + out.stderr).strip().splitlines()[-1:])
+
+    # 11. The per-junction diagnosis (T15, 2026-11-23): arlgos/diag_junctions.py's static phase audit
+    #     (aliased phases on a made-up junction, on Cologne8 and on Fenglin; no simulation)
+    out = subprocess.run([sys.executable, os.path.join(REPO, 'arlgos', 'diag_junctions.py'), '--selftest'],
+                         cwd=REPO, capture_output=True, text=True)
+    lines = [l for l in out.stdout.splitlines() if l.startswith('[PASS]') or l.startswith('[FAIL]')]
+    for line in lines:
+        print('  diag ' + line)
+        if line.startswith('[FAIL]'):
+            FAILED.append('diag: ' + line[7:])
+    check('diagnosis checks ran (arlgos/diag_junctions.py --selftest)',
+          out.returncode in (0, 1) and len(lines) >= 7,
+          '{} lines'.format(len(lines)) if lines else (out.stdout + out.stderr).strip().splitlines()[-1:])
+
+    # 12-13. T15A (2026-11-25), the lab PC's head-to-head on every paper network: the report's
+    #        scoring (equal to fenglin_report.py's on the same runs) and the import of the
+    #        supervisor's original-code Unicorn runs (never writes into the source), on made-up runs
+    for item, script, label, need in ((12, 'h2h_report.py', 'h2h', 7), (13, 'import_unicorn_runs.py', 'import', 7)):
+        out = subprocess.run([sys.executable, os.path.join(REPO, 'arlgos', script), '--selftest'],
+                             cwd=REPO, capture_output=True, text=True)
+        lines = [l for l in out.stdout.splitlines() if l.startswith('[PASS]') or l.startswith('[FAIL]')]
+        for line in lines:
+            print('  {} {}'.format(label, line))
+            if line.startswith('[FAIL]'):
+                FAILED.append('{}: {}'.format(label, line[7:]))
+        check('{}. {} checks ran (arlgos/{} --selftest)'.format(item, label, script),
+              out.returncode in (0, 1) and len(lines) >= need,
+              '{} lines'.format(len(lines)) if lines else (out.stdout + out.stderr).strip().splitlines()[-1:])
 
     print('\n{} failed'.format(len(FAILED)) if FAILED else '\nall checks passed')
     sys.exit(1 if FAILED else 0)

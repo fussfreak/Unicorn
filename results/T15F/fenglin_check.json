@@ -1,0 +1,201 @@
+{
+ "checks": [
+  {
+   "check": "cfg_upstream",
+   "ok": true,
+   "detail": "UNICORN_FCD=1 sumocfg identical to HEAD's (743 bytes)"
+  },
+  {
+   "check": "cfg_default",
+   "ok": true,
+   "detail": "default = upstream minus 2 lines: ['<fcd-output value=\"fcd.xml\"/>', '<fcd-output.signals value=\"true\"/>']"
+  },
+  {
+   "check": "launcher_running_count",
+   "ok": true,
+   "detail": "run_arlgos.ps1 counts running seeds as @(Running $s).Count (2 places, 0 unwrapped)"
+  },
+  {
+   "check": "heldout_base",
+   "ok": true,
+   "detail": "6677 vehicles with unique ids in fenglin_y2z_t.rou.xml"
+  },
+  {
+   "check": "heldout_deterministic",
+   "ok": true,
+   "detail": "seed 5042 twice -> identical day"
+  },
+  {
+   "check": "heldout_seeds_differ",
+   "ok": true,
+   "detail": "seed 5042 vs 1000: 6663 of 6677 departure times differ"
+  },
+  {
+   "check": "heldout_valid",
+   "ok": true,
+   "detail": "keep=1: 6677 vehicles, sorted, 0.00-3599.00 s, routes unchanged, max shift 59.98 s, 0 beyond jitter"
+  },
+  {
+   "check": "heldout_jitter_spread",
+   "ok": true,
+   "detail": "mean |shift| 29.7 s (uniform on [-60, 60] gives 30)"
+  },
+  {
+   "check": "heldout_keep",
+   "ok": true,
+   "detail": "keep=0.9: 6009 of 6677 kept (expected 6009 +- 98); kept vehicles at the keep=1 times: True"
+  },
+  {
+   "check": "fcd_equal_900201",
+   "ok": true,
+   "detail": "fcd on vs off: 3600 traffic rows, 4259 trips, queue 1.4653; differing: nothing; 99.7 s vs 65.5 s"
+  },
+  {
+   "check": "fcd_equal_900202",
+   "ok": true,
+   "detail": "fcd on vs off: 3600 traffic rows, 4273 trips, queue 1.3384; differing: nothing; 95.9 s vs 63.3 s"
+  },
+  {
+   "check": "val_score_same",
+   "ok": true,
+   "detail": "eval_unicorn.decision_queue vs ArlgosEnv.queue_series at all 1205 decision points of 5 episodes: max difference 0.0"
+  },
+  {
+   "check": "heldout_sim",
+   "ok": true,
+   "detail": "published loaded 6677 / inserted 4943; held-out loaded 6677 / inserted 5211; traffic differs: True"
+  }
+ ],
+ "episodes": {
+  "900201/fcd1/published": {
+   "seed": 900201,
+   "fcd": "1",
+   "demand": "published",
+   "client": "libsumo",
+   "steps": 240,
+   "seconds": 99.7,
+   "traffic_rows": 3600,
+   "trips": 4259,
+   "traffic_sha": "a688724b447fc5429b157a9ab3f8a11b1f47069a3f08ff73683fd9407fb1a2cc",
+   "trips_sha": "403e92ad27541a934f375062e278ac6d924a869f7ddce968015032c862ce2dda",
+   "queue_sha": "2a8e06775d5fbdec364f200367352169b3d41b45292b470c9df026efbdcdfc9a",
+   "decision_queue": 1.4652672687332193,
+   "loaded": 6677,
+   "inserted": 4943,
+   "mirror_points": 241,
+   "mirror_max_diff": 0.0,
+   "metrics": {
+    "queue": 1.4779019607843136,
+    "speed": 3.2128972243277607,
+    "delay": 22.885938974800595,
+    "completion": 1.1830555555555555,
+    "trip_time": 324.3139234562104,
+    "trip_delay": 227.5493801361822
+   }
+  },
+  "900201/fcd0/published": {
+   "seed": 900201,
+   "fcd": "0",
+   "demand": "published",
+   "client": "libsumo",
+   "steps": 240,
+   "seconds": 65.5,
+   "traffic_rows": 3600,
+   "trips": 4259,
+   "traffic_sha": "a688724b447fc5429b157a9ab3f8a11b1f47069a3f08ff73683fd9407fb1a2cc",
+   "trips_sha": "403e92ad27541a934f375062e278ac6d924a869f7ddce968015032c862ce2dda",
+   "queue_sha": "2a8e06775d5fbdec364f200367352169b3d41b45292b470c9df026efbdcdfc9a",
+   "decision_queue": 1.4652672687332193,
+   "loaded": 6677,
+   "inserted": 4943,
+   "mirror_points": 241,
+   "mirror_max_diff": 0.0,
+   "metrics": {
+    "queue": 1.4779019607843136,
+    "speed": 3.2128972243277607,
+    "delay": 22.885938974800595,
+    "completion": 1.1830555555555555,
+    "trip_time": 324.3139234562104,
+    "trip_delay": 227.5493801361822
+   }
+  },
+  "900202/fcd1/published": {
+   "seed": 900202,
+   "fcd": "1",
+   "demand": "published",
+   "client": "libsumo",
+   "steps": 240,
+   "seconds": 95.9,
+   "traffic_rows": 3600,
+   "trips": 4273,
+   "traffic_sha": "e3af2927f887185b67971901afd0ac953fe99761213a64e0f9a0f63fd81e5133",
+   "trips_sha": "0dbcd489e290403653e2d3f58b47ad1cc4828b559e064d78f94fbc4f392badac",
+   "queue_sha": "cf57141f375b476c09e673c3af2b90a558c4fc0eb176adc59cac6a4bd1a7722e",
+   "decision_queue": 1.3384427629973148,
+   "loaded": 6677,
+   "inserted": 4945,
+   "mirror_points": 241,
+   "mirror_max_diff": 0.0,
+   "metrics": {
+    "queue": 1.3500555555555558,
+    "speed": 3.3534819934060818,
+    "delay": 21.887426125462262,
+    "completion": 1.1869444444444444,
+    "trip_time": 305.27287619939153,
+    "trip_delay": 207.31663936344486
+   }
+  },
+  "900202/fcd0/published": {
+   "seed": 900202,
+   "fcd": "0",
+   "demand": "published",
+   "client": "libsumo",
+   "steps": 240,
+   "seconds": 63.3,
+   "traffic_rows": 3600,
+   "trips": 4273,
+   "traffic_sha": "e3af2927f887185b67971901afd0ac953fe99761213a64e0f9a0f63fd81e5133",
+   "trips_sha": "0dbcd489e290403653e2d3f58b47ad1cc4828b559e064d78f94fbc4f392badac",
+   "queue_sha": "cf57141f375b476c09e673c3af2b90a558c4fc0eb176adc59cac6a4bd1a7722e",
+   "decision_queue": 1.3384427629973148,
+   "loaded": 6677,
+   "inserted": 4945,
+   "mirror_points": 241,
+   "mirror_max_diff": 0.0,
+   "metrics": {
+    "queue": 1.3500555555555558,
+    "speed": 3.3534819934060818,
+    "delay": 21.887426125462262,
+    "completion": 1.1869444444444444,
+    "trip_time": 305.27287619939153,
+    "trip_delay": 207.31663936344486
+   }
+  },
+  "900201/fcd0/heldout": {
+   "seed": 900201,
+   "fcd": "0",
+   "demand": "heldout",
+   "client": "libsumo",
+   "steps": 240,
+   "seconds": 61.5,
+   "traffic_rows": 3600,
+   "trips": 4614,
+   "traffic_sha": "320ffc66e0c2fb13d1ea8011c48a03f80c86787d3e6e5d1be3dffe67b85f9b33",
+   "trips_sha": "599c51afa28f01e16024c786c41f8d260e41d15a607978b86b5a488f037a7ff9",
+   "queue_sha": "a6436f76e573d0b95df105701a82436db9298c6e7e5110a62e12580bd04b23cd",
+   "decision_queue": 1.526678057114962,
+   "loaded": 6677,
+   "inserted": 5211,
+   "mirror_points": 241,
+   "mirror_max_diff": 0.0,
+   "metrics": {
+    "queue": 1.538830065359477,
+    "speed": 3.8356792065805014,
+    "delay": 20.974410679113692,
+    "completion": 1.2816666666666667,
+    "trip_time": 338.7548764629389,
+    "trip_delay": 230.73539445166887
+   }
+  }
+ }
+}

@@ -1,0 +1,366 @@
+{
+ "C3": {
+  "incoming_lane_list": [
+   "C3p_C3_0",
+   "C2_C3_0",
+   "C2_C3_1",
+   "C3m_C3_0",
+   "W_C3_0",
+   "W_C3_1"
+  ],
+  "outgoing_lane_list": [
+   "C3_W_0",
+   "C3_C3m_0",
+   "C3_C2_1",
+   "C3_C3p_0",
+   "C3_W_1",
+   "C3_C2_0"
+  ],
+  "incoming_detector_list": [
+   "C3p_C3_0",
+   "C2_C3_0",
+   "C2_C3_1",
+   "C3m_C3_0",
+   "W_C3_0",
+   "W_C3_1"
+  ],
+  "outgoing_detector_list": [
+   "C3_W_0",
+   "C3_C3m_0",
+   "C3_C2_1",
+   "C3_C3p_0",
+   "C3_W_1",
+   "C3_C2_0"
+  ],
+  "lane_links": {
+   "C3p_C3_0": [
+    "C3_W_0",
+    "C3_C3m_0",
+    "C3_C2_1"
+   ],
+   "C2_C3_0": [
+    "C3_C3p_0",
+    "C3_W_0"
+   ],
+   "C2_C3_1": [
+    "C3_W_1",
+    "C3_C3m_0"
+   ],
+   "C3m_C3_0": [
+    "C3_C2_0",
+    "C3_C3p_0",
+    "C3_W_1"
+   ],
+   "W_C3_0": [
+    "C3_C3m_0",
+    "C3_C2_0"
+   ],
+   "W_C3_1": [
+    "C3_C2_1",
+    "C3_C3p_0"
+   ]
+  },
+  "num_links_lane": [
+   3.0,
+   2.0,
+   2.0,
+   3.0,
+   2.0,
+   2.0
+  ],
+  "action_space": [
+   "GGgrrrrGGgrrrr",
+   "rrrGGGgrrrGGGg"
+  ],
+  "neighbor_list": [
+   "C2"
+  ],
+  "phase_lane_state": null,
+  "phase_type": "2.0",
+  "phase_type_vec": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "tls_position_vec": [
+   200.0,
+   200.0
+  ],
+  "lane_length_dict": {
+   "C3p_C3_0": 189.6,
+   "C2_C3_0": 49.1,
+   "C2_C3_1": 49.1,
+   "C3m_C3_0": 189.6,
+   "W_C3_0": 192.8,
+   "W_C3_1": 192.8,
+   "C3_W_0": 192.8,
+   "C3_C3m_0": 189.6,
+   "C3_C2_1": 49.1,
+   "C3_C3p_0": 189.6,
+   "C3_W_1": 192.8,
+   "C3_C2_0": 49.1
+  },
+  "lane_max_speed_dict": {
+   "C3p_C3_0": 11.11,
+   "C2_C3_0": 11.11,
+   "C2_C3_1": 11.11,
+   "C3m_C3_0": 11.11,
+   "W_C3_0": 11.11,
+   "W_C3_1": 11.11,
+   "C3_W_0": 11.11,
+   "C3_C3m_0": 11.11,
+   "C3_C2_1": 11.11,
+   "C3_C3p_0": 11.11,
+   "C3_W_1": 11.11,
+   "C3_C2_0": 11.11
+  },
+  "valid_phase_list": [
+   "GGgrrrrGGgrrrr",
+   "rrrGGGgrrrGGGg"
+  ]
+ },
+ "C2": {
+  "incoming_lane_list": [
+   "C2p_C2_0",
+   "C1_C2_0",
+   "C1_C2_1",
+   "C2m_C2_0",
+   "C3_C2_0",
+   "C3_C2_1"
+  ],
+  "outgoing_lane_list": [
+   "C2_C3_0",
+   "C2_C2m_0",
+   "C2_C1_1",
+   "C2_C2p_0",
+   "C2_C3_1",
+   "C2_C1_0"
+  ],
+  "incoming_detector_list": [
+   "C2p_C2_0",
+   "C1_C2_0",
+   "C1_C2_1",
+   "C2m_C2_0",
+   "C3_C2_0",
+   "C3_C2_1"
+  ],
+  "outgoing_detector_list": [
+   "C2_C3_0",
+   "C2_C2m_0",
+   "C2_C1_1",
+   "C2_C2p_0",
+   "C2_C3_1",
+   "C2_C1_0"
+  ],
+  "lane_links": {
+   "C2p_C2_0": [
+    "C2_C3_0",
+    "C2_C2m_0",
+    "C2_C1_1"
+   ],
+   "C1_C2_0": [
+    "C2_C2p_0",
+    "C2_C3_0"
+   ],
+   "C1_C2_1": [
+    "C2_C3_1",
+    "C2_C2m_0"
+   ],
+   "C2m_C2_0": [
+    "C2_C1_0",
+    "C2_C2p_0",
+    "C2_C3_1"
+   ],
+   "C3_C2_0": [
+    "C2_C2m_0",
+    "C2_C1_0"
+   ],
+   "C3_C2_1": [
+    "C2_C1_1",
+    "C2_C2p_0"
+   ]
+  },
+  "num_links_lane": [
+   3.0,
+   2.0,
+   2.0,
+   3.0,
+   2.0,
+   2.0
+  ],
+  "action_space": [
+   "GGgrrrrGGgrrrr",
+   "rrrGGGgrrrGGGg"
+  ],
+  "neighbor_list": [
+   "C3",
+   "C1"
+  ],
+  "phase_lane_state": null,
+  "phase_type": "2.0",
+  "phase_type_vec": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "tls_position_vec": [
+   263.5,
+   200.0
+  ],
+  "lane_length_dict": {
+   "C2p_C2_0": 189.6,
+   "C1_C2_0": 63.4,
+   "C1_C2_1": 63.4,
+   "C2m_C2_0": 189.6,
+   "C3_C2_0": 49.1,
+   "C3_C2_1": 49.1,
+   "C2_C3_0": 49.1,
+   "C2_C2m_0": 189.6,
+   "C2_C1_1": 63.4,
+   "C2_C2p_0": 189.6,
+   "C2_C3_1": 49.1,
+   "C2_C1_0": 63.4
+  },
+  "lane_max_speed_dict": {
+   "C2p_C2_0": 11.11,
+   "C1_C2_0": 11.11,
+   "C1_C2_1": 11.11,
+   "C2m_C2_0": 11.11,
+   "C3_C2_0": 11.11,
+   "C3_C2_1": 11.11,
+   "C2_C3_0": 11.11,
+   "C2_C2m_0": 11.11,
+   "C2_C1_1": 11.11,
+   "C2_C2p_0": 11.11,
+   "C2_C3_1": 11.11,
+   "C2_C1_0": 11.11
+  },
+  "valid_phase_list": [
+   "GGgrrrrGGgrrrr",
+   "rrrGGGgrrrGGGg"
+  ]
+ },
+ "C1": {
+  "incoming_lane_list": [
+   "C1p_C1_0",
+   "E_C1_0",
+   "E_C1_1",
+   "C1m_C1_0",
+   "C2_C1_0",
+   "C2_C1_1"
+  ],
+  "outgoing_lane_list": [
+   "C1_C2_0",
+   "C1_C1m_0",
+   "C1_E_1",
+   "C1_C1p_0",
+   "C1_C2_1",
+   "C1_E_0"
+  ],
+  "incoming_detector_list": [
+   "C1p_C1_0",
+   "E_C1_0",
+   "E_C1_1",
+   "C1m_C1_0",
+   "C2_C1_0",
+   "C2_C1_1"
+  ],
+  "outgoing_detector_list": [
+   "C1_C2_0",
+   "C1_C1m_0",
+   "C1_E_1",
+   "C1_C1p_0",
+   "C1_C2_1",
+   "C1_E_0"
+  ],
+  "lane_links": {
+   "C1p_C1_0": [
+    "C1_C2_0",
+    "C1_C1m_0",
+    "C1_E_1"
+   ],
+   "E_C1_0": [
+    "C1_C1p_0",
+    "C1_C2_0"
+   ],
+   "E_C1_1": [
+    "C1_C2_1",
+    "C1_C1m_0"
+   ],
+   "C1m_C1_0": [
+    "C1_E_0",
+    "C1_C1p_0",
+    "C1_C2_1"
+   ],
+   "C2_C1_0": [
+    "C1_C1m_0",
+    "C1_E_0"
+   ],
+   "C2_C1_1": [
+    "C1_E_1",
+    "C1_C1p_0"
+   ]
+  },
+  "num_links_lane": [
+   3.0,
+   2.0,
+   2.0,
+   3.0,
+   2.0,
+   2.0
+  ],
+  "action_space": [
+   "GGgrrrrGGgrrrr",
+   "rrrGGGgrrrGGGg"
+  ],
+  "neighbor_list": [
+   "C2"
+  ],
+  "phase_lane_state": null,
+  "phase_type": "2.0",
+  "phase_type_vec": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "tls_position_vec": [
+   341.3,
+   200.0
+  ],
+  "lane_length_dict": {
+   "C1p_C1_0": 189.6,
+   "E_C1_0": 192.8,
+   "E_C1_1": 192.8,
+   "C1m_C1_0": 189.6,
+   "C2_C1_0": 63.4,
+   "C2_C1_1": 63.4,
+   "C1_C2_0": 63.4,
+   "C1_C1m_0": 189.6,
+   "C1_E_1": 192.8,
+   "C1_C1p_0": 189.6,
+   "C1_C2_1": 63.4,
+   "C1_E_0": 192.8
+  },
+  "lane_max_speed_dict": {
+   "C1p_C1_0": 11.11,
+   "E_C1_0": 11.11,
+   "E_C1_1": 11.11,
+   "C1m_C1_0": 11.11,
+   "C2_C1_0": 11.11,
+   "C2_C1_1": 11.11,
+   "C1_C2_0": 11.11,
+   "C1_C1m_0": 11.11,
+   "C1_E_1": 11.11,
+   "C1_C1p_0": 11.11,
+   "C1_C2_1": 11.11,
+   "C1_E_0": 11.11
+  },
+  "valid_phase_list": [
+   "GGgrrrrGGgrrrr",
+   "rrrGGGgrrrGGGg"
+  ]
+ }
+}

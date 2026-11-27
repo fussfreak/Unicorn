@@ -1,0 +1,20 @@
+<additional>
+    <laneAreaDetector id="e2_C3_N_0" lane="W_C3_0" pos="142.80" length="50.00" period="3600" file="NUL"/>
+    <laneAreaDetector id="e2_C3_N_1" lane="W_C3_1" pos="142.80" length="50.00" period="3600" file="NUL"/>
+    <laneAreaDetector id="e2_C3_S_0" lane="C2_C3_0" pos="0.50" length="48.60" period="3600" file="NUL"/>
+    <laneAreaDetector id="e2_C3_S_1" lane="C2_C3_1" pos="0.50" length="48.60" period="3600" file="NUL"/>
+    <laneAreaDetector id="e2_C3_E_0" lane="C3p_C3_0" pos="139.60" length="50.00" period="3600" file="NUL"/>
+    <laneAreaDetector id="e2_C3_W_0" lane="C3m_C3_0" pos="139.60" length="50.00" period="3600" file="NUL"/>
+    <laneAreaDetector id="e2_C2_N_0" lane="C3_C2_0" pos="0.50" length="48.60" period="3600" file="NUL"/>
+    <laneAreaDetector id="e2_C2_N_1" lane="C3_C2_1" pos="0.50" length="48.60" period="3600" file="NUL"/>
+    <laneAreaDetector id="e2_C2_S_0" lane="C1_C2_0" pos="13.40" length="50.00" period="3600" file="NUL"/>
+    <laneAreaDetector id="e2_C2_S_1" lane="C1_C2_1" pos="13.40" length="50.00" period="3600" file="NUL"/>
+    <laneAreaDetector id="e2_C2_E_0" lane="C2p_C2_0" pos="139.60" length="50.00" period="3600" file="NUL"/>
+    <laneAreaDetector id="e2_C2_W_0" lane="C2m_C2_0" pos="139.60" length="50.00" period="3600" file="NUL"/>
+    <laneAreaDetector id="e2_C1_N_0" lane="C2_C1_0" pos="13.40" length="50.00" period="3600" file="NUL"/>
+    <laneAreaDetector id="e2_C1_N_1" lane="C2_C1_1" pos="13.40" length="50.00" period="3600" file="NUL"/>
+    <laneAreaDetector id="e2_C1_S_0" lane="E_C1_0" pos="142.80" length="50.00" period="3600" file="NUL"/>
+    <laneAreaDetector id="e2_C1_S_1" lane="E_C1_1" pos="142.80" length="50.00" period="3600" file="NUL"/>
+    <laneAreaDetector id="e2_C1_E_0" lane="C1p_C1_0" pos="139.60" length="50.00" period="3600" file="NUL"/>
+    <laneAreaDetector id="e2_C1_W_0" lane="C1m_C1_0" pos="139.60" length="50.00" period="3600" file="NUL"/>
+</additional>

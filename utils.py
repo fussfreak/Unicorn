@@ -148,6 +148,9 @@ def calculate_discount_return(x, gamma):
 
 
 def set_env(server_number, test=False):
+    if SUMO_PARAMS.NET_NAME == 'corridor_3':      # ARLGOS (T9): the ARLGOS corridor
+        from env.corridor import CorridorEnv
+        return CorridorEnv(server_number, test)
     from env.matsc import MATSC_Env
     return MATSC_Env(server_number, test)
 

@@ -1,4 +1,4 @@
-import traci
+from env.sumo_api import traci  # ARLGOS (T9): traci, or libsumo with UNICORN_LIBSUMO=1
 import numpy as np
 
 from collections import OrderedDict
